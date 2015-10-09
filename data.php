@@ -37,11 +37,18 @@
 		
 		if(	$car_plate_error == "" && $car_plate == ""){
 			
+			// functions.php failis käivina funktsiooni
+			createCarPlate($car_plate, $color);
 			
 		}
  }  // create if end
 
-   
+   function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
    
   
 
@@ -52,11 +59,11 @@
   <a href= "?logout=1" >Logi välja</a>
 </p>
 
-<h2>Log in</h2>
+<h2>Lisa auto</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   <label for="car_plate" >auto nr</label><br>
   <input id="car_plate" name="car_plate" type="text" value="<?=$car_plate; ?>"> <?=$car_plate_error; ?><br><br>
   <label>värv</label><br>
   <input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
-  <input type="submit" name="login" value="Log in">
+  <input type="submit" name="create" value="save">
   </form>
