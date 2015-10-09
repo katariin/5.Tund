@@ -2,7 +2,7 @@
 	//kõik AB'iga seonduv
 	
 	// ühenduse loomiseks kasuta
-	require_once("configglobal.php");
+	require_once("../configglobal.php");
 	$database = "if15_kati";
 	//paneme sessiooni käima, kasutada $_SESSION muutujad
 	session_start();
@@ -23,19 +23,30 @@
 	}
 	
 	//logime sisse
-	function loginUser(){
+	function createCarPlate($car_plate, $color){
 		
-		$mysqli = new mysqli($servername, $server_username, $server_password, $database);
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
+		$stmt->bind_param("iss", $_SESSION["id_from_db"], $car_plate, $color);
 		
-		$stmt = $mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
-		$stmt->bind_param("ss", $email, $password_hash);
+		$message = "";
+		
 		$stmt->bind_result($id_from_db, $email_from_db);
-		$stmt->execute();
+		if($stmt->execute());
+		// see on tõene siis kui sisestus ab'i õnnestus
+		$message="edukalt isestatud andmebaasi"
+		}else{
 		echo $stmt->error;
-		
+		}
 		$stmt->close();
 		$mysqli->close();
-                   
+        
+        return $message;		
+	}
+	
+	function welcome($name){
+		echo "Tere" . $name;
+		
 	}
 	
 ?>
