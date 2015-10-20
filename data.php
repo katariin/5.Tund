@@ -3,7 +3,7 @@
    require_once("function.php");
    
    // kas kasutaja on sisse loginud
-   if(isset($_SESSION["id_from_db"])) {
+   if(!isset($_SESSION["id_from_db"])) {
 	   //suudan data lehel
 	   header("Location: login.php");
    }
@@ -11,6 +11,8 @@
    if(isset($_GET["logout"])){
 	   // kustutab kõik sessiooni muutujad
 	   session_destroy();
+	   
+	   
 	   header("Location: login.php");
 	   
    }
@@ -35,7 +37,7 @@
 			$color = cleanInput($_POST["color"]);
 		}
 		
-		if(	$car_plate_error == "" && $car_plate == ""){
+		if($car_plate_error == "" && $car_plate == ""){
 			
 			// functions.php failis käivina funktsiooni
 			//msg on message funktsioonist mis tagasi saadame

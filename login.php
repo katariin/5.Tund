@@ -51,26 +51,26 @@
 		
 		echo "vajutas create nuppu!";
 		
-		if ( empty($_POST["firstname"]) ) {
+		if (empty($_POST["firstname"]) ) {
 			$firstname_error = "See vali on kohustuslik";
-		}else{
+		  }else{
 			$firstname= cleanInput($_POST["firstname"]);
 		}
 		
 		if ( empty($_POST["lastname"]) ) {
 			$lastname_error = "See vali on kohustuslik";
-		}else{
+		  }else{
 			$lastname = cleanInput($_POST["lastname"]);
 		}
 		
 		if ( empty($_POST["create_email"]) ) {
 			$create_email_error = "See vali on kohustuslik";
-		}else{
+		  }else{
 			$create_email = cleanInput($_POST["create_email"]);
 		}
 		if ( empty($_POST["create_password"]) ) {
 			$create_password_error = "See vali on kohustuslik";
-		} else {
+		  }else{
 			if(strlen($_POST["create_password"]) < 8) {
 				$create_password_error = "Peab olema vahemalt 8 tahemarki pikk!";
 			}else{
